@@ -74,7 +74,10 @@ tests = [
     "pytest-cov",
     "pooch",
 ]
-dev = [{include-group = "tests"}]
+dev = [
+    {include-group = "tests"},
+    "ruff>=0.16.8",
+]
 
 [project.urls]
 Documentation = "https://ome-zarr.readthedocs.io"

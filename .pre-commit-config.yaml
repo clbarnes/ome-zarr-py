@@ -24,12 +24,8 @@ repos:
     - id: ruff-check
       args: ["--fix", "--show-fixes"]
       exclude: ^docs/
-
-  - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 26.5.1
-    hooks:
-      - id: black
-        exclude: ^docs/
+    - id: ruff-format
+      exclude: ^docs/
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v2.3.1
