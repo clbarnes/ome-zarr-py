@@ -38,13 +38,15 @@ img4_ms = OMEZarrMultiscale(img4)
 # The coordinate systems can be defined using the `CoordinateSystem` class:
 
 # %%
-coordinate_system = CoordinateSystem.model_validate({
-    "name": "world",
-    "axes": [
-        {"name": "y", "type": "space"},
-        {"name": "x", "type": "space"},
-    ],
-})
+coordinate_system = CoordinateSystem.model_validate(
+    {
+        "name": "world",
+        "axes": [
+            {"name": "y", "type": "space"},
+            {"name": "x", "type": "space"},
+        ],
+    }
+)
 
 # %% [markdown]
 # ::::{hint}
@@ -64,30 +66,38 @@ coordinate_system = CoordinateSystem.model_validate({
 
 # %%
 coordinate_transformations = [
-    Translation.model_validate({
-        "type": "translation",
-        "translation": [0, 0],
-        "input": {"path": "img1", "name": "physical"},
-        "output": {"name": "world"},
-    }),
-    Translation.model_validate({
-        "type": "translation",
-        "translation": [256, 0],
-        "input": {"path": "img2", "name": "physical"},
-        "output": {"name": "world"},
-    }),
-    Translation.model_validate({
-        "type": "translation",
-        "translation": [0, 256],
-        "input": {"path": "img3", "name": "physical"},
-        "output": {"name": "world"},
-    }),
-    Translation.model_validate({
-        "type": "translation",
-        "translation": [256, 256],
-        "input": {"path": "img4", "name": "physical"},
-        "output": {"name": "world"},
-    }),
+    Translation.model_validate(
+        {
+            "type": "translation",
+            "translation": [0, 0],
+            "input": {"path": "img1", "name": "physical"},
+            "output": {"name": "world"},
+        }
+    ),
+    Translation.model_validate(
+        {
+            "type": "translation",
+            "translation": [256, 0],
+            "input": {"path": "img2", "name": "physical"},
+            "output": {"name": "world"},
+        }
+    ),
+    Translation.model_validate(
+        {
+            "type": "translation",
+            "translation": [0, 256],
+            "input": {"path": "img3", "name": "physical"},
+            "output": {"name": "world"},
+        }
+    ),
+    Translation.model_validate(
+        {
+            "type": "translation",
+            "translation": [256, 256],
+            "input": {"path": "img4", "name": "physical"},
+            "output": {"name": "world"},
+        }
+    ),
 ]
 
 # %% [markdown]
@@ -97,7 +107,7 @@ coordinate_transformations = [
 scene = OMEZarrScene(
     images=[img1_ms, img2_ms, img3_ms, img4_ms],
     coordinate_systems=[coordinate_system],
-    coordinate_transformations=coordinate_transformations
+    coordinate_transformations=coordinate_transformations,
 )
 
 scene.to_ome_zarr("test_example_scene.zarr", overwrite=True)

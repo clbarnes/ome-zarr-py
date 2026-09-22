@@ -31,7 +31,7 @@ ngff_img = OMEZarrImage(
     data=img,
     axes=["c", "z", "y", "x"],
     scale={"c": 1, "z": 1, "y": 1, "x": 1},
-    name="cells3d"
+    name="cells3d",
 )
 
 ngff_ms = OMEZarrMultiscale(
@@ -39,10 +39,7 @@ ngff_ms = OMEZarrMultiscale(
 )
 
 slice_img = OMEZarrImage(
-    data=some_slice,
-    axes=["y", "x"],
-    scale={"y": 1, "x": 1},
-    name="cells3d_slice"
+    data=some_slice, axes=["y", "x"], scale={"y": 1, "x": 1}, name="cells3d_slice"
 )
 
 slice_ms = OMEZarrMultiscale(
@@ -50,26 +47,21 @@ slice_ms = OMEZarrMultiscale(
 )
 
 # %%
-transform_to_3d = Sequence.model_validate({
-    "type": "sequence",
-    "input": {"path": "cells3d_slice", "name": "physical"},
-    "output": {"path": "cells3d", "name": "physical"},
-    "transformations": [
-        {
-            "type": "projectAxis",
-            "createdOutputs": [0, 1]
-        },
-        {
-            "type": "translation",
-            "translation": [0, 30, 0, 0]
-        }
-    ]
-})
+transform_to_3d = Sequence.model_validate(
+    {
+        "type": "sequence",
+        "input": {"path": "cells3d_slice", "name": "physical"},
+        "output": {"path": "cells3d", "name": "physical"},
+        "transformations": [
+            {"type": "projectAxis", "createdOutputs": [0, 1]},
+            {"type": "translation", "translation": [0, 30, 0, 0]},
+        ],
+    }
+)
 
 # %%
 scene = OMEZarrScene(
-    images=[ngff_ms, slice_ms],
-    coordinate_transformations=[transform_to_3d]
+    images=[ngff_ms, slice_ms], coordinate_transformations=[transform_to_3d]
 )
 
 # %%

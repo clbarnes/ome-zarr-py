@@ -345,8 +345,7 @@ class FormatV04(FormatV03):
             translation_types = [t == "translation" for t in types]
             if sum(translation_types) > 1:
                 raise ValueError(
-                    "Must supply 0 or 1 'translation' item in"
-                    "coordinate_transformations"
+                    "Must supply 0 or 1 'translation' item incoordinate_transformations"
                 )
             elif sum(translation_types) == 1:
                 transformation = transformations[types.index("translation")]

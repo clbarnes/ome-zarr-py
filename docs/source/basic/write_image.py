@@ -33,10 +33,10 @@ data = rng.poisson(lam=10, size=(2, size_z, size_xy, size_xy)).astype(np.uint8)
 
 # %%
 image = OMEZarrImage(
-  data=data,
-  axes=["c", "z", "y", "x"],
-  scale={"c": 1.0, "z": 0.5, "y": 0.1, "x": 0.1},
-  axes_units={"z": "micrometer", "y": "micrometer", "x": "micrometer"},
+    data=data,
+    axes=["c", "z", "y", "x"],
+    scale={"c": 1.0, "z": 0.5, "y": 0.1, "x": 0.1},
+    axes_units={"z": "micrometer", "y": "micrometer", "x": "micrometer"},
 )
 
 multiscales = OMEZarrMultiscale(
@@ -45,8 +45,8 @@ multiscales = OMEZarrMultiscale(
     method="resize",
     channel_names=["DAPI", "GFP"],  # optional
     channel_colors=["00FFFF", "FF00FF"],  # optional
-    contrast_limits=[(0, 255), (0, 255)]  # optional
-    )
+    contrast_limits=[(0, 255), (0, 255)],  # optional
+)
 multiscales.to_ome_zarr("test_ngff.ome.zarr", version="0.6")
 
 # %%

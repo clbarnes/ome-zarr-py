@@ -329,7 +329,7 @@ class TestWriter:
         if storage_options_list:
             storage_options = [{"chunks": chunk} for chunk in chunks]
         scale_factors = [
-            {str(d): 2 ** i if d in ("x", "y") else 1.0 for d in axes}
+            {str(d): 2**i if d in ("x", "y") else 1.0 for d in axes}
             for i in range(1, len(TRANSFORMATIONS))
         ]
 
@@ -2130,15 +2130,15 @@ class TestLabelWriter:
 
         chunks = storage_options["chunks"]
         expected_chunks = _retuple(chunks, level0.shape)
-        assert (
-            level0.chunks == expected_chunks
-        ), f"Expected chunks {expected_chunks}, got {level0.chunks}"
+        assert level0.chunks == expected_chunks, (
+            f"Expected chunks {expected_chunks}, got {level0.chunks}"
+        )
 
         if USE_DASK_ARRAY_KWARGS and fmt.version == "0.5" and hasattr(level0, "shards"):
             expected_shards = _retuple(storage_options["shards"], level0.shape)
-            assert (
-                level0.shards == expected_shards
-            ), f"Expected shards {expected_shards}, got {level0.shards}"
+            assert level0.shards == expected_shards, (
+                f"Expected shards {expected_shards}, got {level0.shards}"
+            )
 
         assert level0.fill_value == 0
 
@@ -2215,7 +2215,7 @@ class TestLabelWriter:
             dims = ("y", "x")
 
         scale_factors = [
-            {dim: 2 ** i if dim in ("z", "y", "x") else 1 for dim in dims}
+            {dim: 2**i if dim in ("z", "y", "x") else 1 for dim in dims}
             for i in range(1, 5)
         ]
 
@@ -2307,19 +2307,19 @@ class TestLabelWriter:
                 while len(expected_shape) < 5:
                     expected_shape = (1,) + expected_shape
 
-            assert (
-                level.shape == expected_shape
-            ), f"Level {level_idx}: Expected shape {expected_shape}, got {level.shape}"
+            assert level.shape == expected_shape, (
+                f"Level {level_idx}: Expected shape {expected_shape}, got {level.shape}"
+            )
 
-            assert np.array_equal(
-                level[:], expected_data
-            ), f"Level {level_idx}: Data mismatch"
+            assert np.array_equal(level[:], expected_data), (
+                f"Level {level_idx}: Data mismatch"
+            )
 
             chunks = storage_options["chunks"]
             expected_chunks = _retuple(chunks, level.shape)
-            assert (
-                level.chunks == expected_chunks
-            ), f"Level {level_idx}: Expected chunks {expected_chunks}, got {level.chunks}"
+            assert level.chunks == expected_chunks, (
+                f"Level {level_idx}: Expected chunks {expected_chunks}, got {level.chunks}"
+            )
 
             if (
                 USE_DASK_ARRAY_KWARGS
@@ -2327,13 +2327,13 @@ class TestLabelWriter:
                 and hasattr(level, "shards")
             ):
                 expected_shards = _retuple(storage_options["shards"], level.shape)
-                assert (
-                    level.shards == expected_shards
-                ), f"Level {level_idx}: Expected shards {expected_shards}, got {level.shards}"
+                assert level.shards == expected_shards, (
+                    f"Level {level_idx}: Expected shards {expected_shards}, got {level.shards}"
+                )
 
-            assert (
-                level.fill_value == 0
-            ), f"Level {level_idx}: Expected fill_value 0, got {level.fill_value}"
+            assert level.fill_value == 0, (
+                f"Level {level_idx}: Expected fill_value 0, got {level.fill_value}"
+            )
 
             if level.compressors:
                 if fmt.version == "0.5":
@@ -2356,9 +2356,9 @@ class TestLabelWriter:
                     assert level.compressors[0].to_dict()["configuration"]["level"] == 0
 
             if fmt.version == "0.5" and hasattr(level, "dimension_names"):
-                assert level.dimension_names == tuple(
-                    axes
-                ), f"Level {level_idx}: Expected dimension names {tuple(axes)}, got {level.dimension_names}"
+                assert level.dimension_names == tuple(axes), (
+                    f"Level {level_idx}: Expected dimension names {tuple(axes)}, got {level.dimension_names}"
+                )
 
         # Verify metadata is valid
         if fmt.version == "0.4":
@@ -2409,7 +2409,7 @@ class TestLabelWriter:
             label_data = np.random.randint(0, 1000, size=shape)
             label_data = array_constructor(label_data)
             scale_factors = [
-                {dim: 2 ** i if dim in ("z", "y", "x") else 1 for dim in axes}
+                {dim: 2**i if dim in ("z", "y", "x") else 1 for dim in axes}
                 for i in range(1, 5)
             ]
             labels_mip = _build_pyramid(

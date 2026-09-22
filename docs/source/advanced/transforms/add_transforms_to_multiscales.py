@@ -50,23 +50,24 @@ ms.metadata.coordinateSystems
 # ```
 
 # %%
-rotation_transform = Rotation.model_validate({
-    "type": "rotation",
-    "rotation": [
-        [np.cos(np.pi/4), -np.sin(np.pi/4)],
-        [np.sin(np.pi/4), np.cos(np.pi/4)]
-    ],
-    "input": {"name": "physical"},
-    "output": {"name": "world"}
-})
+rotation_transform = Rotation.model_validate(
+    {
+        "type": "rotation",
+        "rotation": [
+            [np.cos(np.pi / 4), -np.sin(np.pi / 4)],
+            [np.sin(np.pi / 4), np.cos(np.pi / 4)],
+        ],
+        "input": {"name": "physical"},
+        "output": {"name": "world"},
+    }
+)
 
-world_cs = CoordinateSystem.model_validate({
-    "name": "world",
-    "axes": [
-        {"name": "y", "type": "space"},
-        {"name": "x", "type": "space"}
-    ],
-})
+world_cs = CoordinateSystem.model_validate(
+    {
+        "name": "world",
+        "axes": [{"name": "y", "type": "space"}, {"name": "x", "type": "space"}],
+    }
+)
 
 # %% [markdown]
 # The `output` field refers to the name `world` of the created coordinate system.
@@ -78,7 +79,7 @@ ms = OMEZarrMultiscale(
     image=image,
     coordinate_transformations=[rotation_transform],
     coordinate_systems=[world_cs],
-    )
+)
 
 # %% [markdown]
 # And that's it! A viewer could now choose to show your image in the "world" coordinate system,

@@ -10,7 +10,13 @@ for p in pathlib.Path(__file__).parent.glob("**/*.zarr"):
     shutil.rmtree(p)
 print("✅ Cleaned up .zarr objects")
 
-exclude_patterns = ["**.ipynb_checkpoints", ".DS_Store", "Thumbs.db", "_build", "conf.py"]
+exclude_patterns = [
+    "**.ipynb_checkpoints",
+    ".DS_Store",
+    "Thumbs.db",
+    "_build",
+    "conf.py",
+]
 extensions = [
     "sphinx_togglebutton",
     "sphinx_copybutton",

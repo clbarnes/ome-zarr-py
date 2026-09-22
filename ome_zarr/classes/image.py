@@ -152,7 +152,6 @@ class OMEZarrImage:
 
 
 class OMEZarrMultiscaleBase:
-
     name: str
 
     def __init__(
@@ -210,7 +209,6 @@ class OMEZarrMultiscaleBase:
         images = []
         datasets = []
         for idx, (level_data, level_scale) in enumerate(zip(pyramid, scales)):
-
             images.append(
                 OMEZarrImage(
                     data=level_data,
@@ -283,7 +281,6 @@ class OMEZarrMultiscaleBase:
 
             # Some checks on the transform's input and output coordinate system
             for idx, tf in enumerate(transforms):
-
                 # first, check that they are not None
                 if tf.input is None:
                     raise ValueError(
@@ -534,7 +531,6 @@ class OMEZarrMultiscaleBase:
                 is_label = True
 
         elif "0.6" in version:
-
             ome_attrs = cast(dict[str, Any], group.attrs.get("ome", {}))
             metadata_json = ome_attrs.get("multiscales", [None])[0]
 
@@ -661,9 +657,7 @@ class OMEZarrMultiscaleBase:
 
         datasets = []
         for idx, ds in enumerate(metadata_json.get("datasets", [])):
-            scale_level = [
-                2.0 ** idx if s.name in ("z", "y", "x") else 1.0 for s in axes
-            ]
+            scale_level = [2.0**idx if s.name in ("z", "y", "x") else 1.0 for s in axes]
 
             path = ds.get("path", f"s{idx}")
             if idx == 0:

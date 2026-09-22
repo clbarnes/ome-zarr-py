@@ -582,7 +582,7 @@ class CaseBuilder:
         return pytest.mark.parametrize(self.params, self.cases, ids=self.ids)(test_fn)
 
 
-@ (
+@(
     CaseBuilder(["ozm_transform", "kwargs"])
     .add(ozmt.Identity(), {"source_ndim": 3}, id="identity")
     .add(ozmt.Scale(scale=(2, 3)), {}, id="scale")
@@ -658,9 +658,9 @@ def check_transforms_equivalent(
     tnd_inv = tnd_transform.invert()
     try:
         if ozm_transform.has_inverse:
-            assert (
-                tnd_inv is not None
-            ), "ome-zarr-models implements inversion but transformnd does not"
+            assert tnd_inv is not None, (
+                "ome-zarr-models implements inversion but transformnd does not"
+            )
     except NotImplementedError:
         pass
 
