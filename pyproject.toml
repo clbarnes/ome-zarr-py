@@ -151,3 +151,15 @@ ignore-regex = "[A-Za-z0-9+/]{100,}"
 [tool.pytest]
 addopts = ["--doctest-modules"]
 testpaths = ["ome_zarr", "tests"]
+
+[tool.mypy]
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "deprecated.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "ome_zarr"
+disallow_untyped_defs = true
